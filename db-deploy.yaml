@@ -1,0 +1,24 @@
+# File: database-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: open-app
+spec:
+  selector:
+    matchLabels:
+      component: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: database
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:12
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "example"

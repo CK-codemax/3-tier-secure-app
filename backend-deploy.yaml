@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: open-app
+spec:
+  selector:
+    matchLabels:
+      component: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        component: backend
+    spec:
+      containers:
+        - name: backend
+          image: digitalocean/flask-helloworld
+          command: ["/bin/sh"]
+          args: ["-c", "apk add --no-cache postgresql-client && python -m flask run --host=0.0.0.0 --port=5000"]
+          env:
+            - name: FLASK_APP
+              value: app.py
+          ports:
+            - containerPort: 5000
