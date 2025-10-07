@@ -14,13 +14,14 @@ spec:
         component: frontend
     spec:
       containers:
+      # Main Nginx container
       - name: nginx
         image: nginx:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - apt-get update && \
-            apt-get install -y postgresql-client && \
-            rm -rf /var/lib/apt/lists/* && \
-            nginx -g 'daemon off;'
         ports:
         - containerPort: 80
+        command: ["nginx", "-g", "daemon off;"]
+
+      # Sidecar container for PostgreSQL client tools
+      - name: psql-client
+        image: postgres:16
+        command: ["sleep", "infinity"]
