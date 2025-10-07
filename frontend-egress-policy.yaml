@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-frontend
+  namespace: open-app
+spec:
+  podSelector:
+    matchLabels:
+      component: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          component: backend
+    ports:
+    - port: 5000
+      protocol: TCP
