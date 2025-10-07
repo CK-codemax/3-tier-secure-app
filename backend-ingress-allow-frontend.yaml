@@ -15,5 +15,5 @@ spec:
         matchLabels:
           component: frontend
     ports:
-    - port: 80
+    - port: 5000
       protocol: TCP
