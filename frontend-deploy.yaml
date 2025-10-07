@@ -17,7 +17,5 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
-        command: ["/bin/bash", "-c"]
-        args: ["apt-get update && apt-get install -y postgresql-client && nginx"]
         ports:
         - containerPort: 80
