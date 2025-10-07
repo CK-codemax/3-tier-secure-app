@@ -5,7 +5,12 @@ metadata:
   namespace: open-app
 spec:
   podSelector:
-    matchLabels: {}
+    matchExpressions:
+    - key: component
+      operator: In
+      values:
+      - frontend
+      - backend
   policyTypes:
   - Ingress
   - Egress
